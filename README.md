@@ -9,7 +9,7 @@ The Vencord Installer allows you to install [Vencord+, the best Discord Desktop 
 ### Windows
 
 > **Warning**
-**Do not** run the installer as Admin
+> **Do not** run the installer as Admin
 
 Download [VencordInstaller.exe](https://github.com/StupidityDB/VencordPlusInstaller/releases/latest/download/VencordInstaller.exe) and run it
 
@@ -31,17 +31,17 @@ sh -c "$(curl -sS https://raw.githubusercontent.com/StupidityDB/VencordPlusInsta
 
 ### MacOs
 
-Download the latest [MacOs build](https://github.com/StupidityDB/VencordPlusInstaller/releases/latest/download/VencordInstaller.MacOS.zip), unzip it, and run `VencordInstaller.app` 
+Download the latest [MacOs build](https://github.com/StupidityDB/VencordPlusInstaller/releases/latest/download/VencordInstaller.MacOS.zip), unzip it, and run `VencordInstaller.app`
 
 If you get a `VencordInstaller can't be opened` warning, right-click `VencordInstaller.app` and click open.
 
 This warning shows because the app isn't signed since I'm not willing to pay 100 bucks a year for an Apple Developer license.
 
-___
+---
 
 ## Building from source
 
-### Prerequisites 
+### Prerequisites
 
 You need to install the [Go programming language](https://go.dev/doc/install) and GCC, the GNU Compiler Collection (MinGW on Windows)
 
@@ -49,16 +49,19 @@ You need to install the [Go programming language](https://go.dev/doc/install) an
 <summary>Additionally, if you're using Linux, you have to install some additional dependencies:</summary>
 
 #### Base dependencies
+
 ```sh
 apt install -y pkg-config libsdl2-dev libglx-dev libgl1-mesa-dev
 ```
 
 #### X11 dependencies
+
 ```sh
 apt install -y xorg-dev
 ```
 
 #### Wayland dependencies
+
 ```sh
 apt install -y libwayland-dev libxkbcommon-dev wayland-protocols extra-cmake-modules
 ```
@@ -76,17 +79,20 @@ go mod tidy
 #### Build the GUI
 
 ##### Windows / Mac / Linux X11
+
 ```sh
 go build
 ```
 
 ##### Linux Wayland
+
 ```sh
 go build --tags wayland
 ```
 
 #### Build the CLI
-```
+
+```sh
 go build --tags cli
 ```
 

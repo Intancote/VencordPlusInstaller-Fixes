@@ -64,7 +64,7 @@ func GetGithubRelease(url, fallbackUrl string) (*GithubRelease, error) {
 		// If that is the case, try our fallback at https://vencord.dev/releases/project
 		if isRateLimitedOrBlocked && !triedFallback {
 			//disable fallback as I am too lazy to do that
-			return nil,errors.New(res.Status)
+			return nil, errors.New(res.Status)
 			//fmt.Printf("Failed to fetch %s (status code %d). Trying fallback url %s\n", url, res.StatusCode, fallbackUrl)
 			//return GetGithubRelease(fallbackUrl, fallbackUrl)
 		}
@@ -135,6 +135,16 @@ func InitGithubDownloader() {
 	}
 }
 
+func isAssetNameValid(name string) bool {
+	validNames := []string{"patcher.js", "preload.js", "renderer.js", "renderer.css"}
+	for _, validName := range validNames {
+		if strings.HasPrefix(name, validName) {
+			return true
+		}
+	}
+	return false
+}
+
 func installLatestBuilds() (retErr error) {
 	fmt.Println("Installing latest builds...")
 
@@ -151,10 +161,7 @@ func installLatestBuilds() (retErr error) {
 	var wg sync.WaitGroup
 
 	for _, ass := range ReleaseData.Assets {
-		if strings.HasPrefix(ass.Name, "patcher.js") ||
-			strings.HasPrefix(ass.Name, "preload.js") ||
-			strings.HasPrefix(ass.Name, "renderer.js") ||
-			strings.HasPrefix(ass.Name, "renderer.css") {
+		if isAssetNameValid(ass.Name) {
 			wg.Add(1)
 			ass := ass // Need to do this to not have the variable be overwritten halfway through
 			go func() {
